@@ -11,7 +11,7 @@ router
     })
     .post('/user', (req, res) => {
 
-        
+        console.log('///////',req.body);
         let phone = req.body.phone;
         var otp = Math.floor((Math.random() * 100000) + 1);
         localStorage.setItem('otp',JSON.stringify(otp));
@@ -21,9 +21,11 @@ router
             body: `Your Otp is ${otp}.`
         }, function (err, data) {
             if (err) {
-                res.status(400).json({ message: 'Invalid Phone Number' });
+                // res.status(400).json({ message: 'Invalid Phone Number' });
+                res.redirect('/');
             } else {
-                res.status(200).json({ message: 'Verify The Number!', phone: phone });
+                // res.status(200).json({ message: 'Verify The Number!', phone: phone });
+                res.redirect('/');
             }
         });
     })
