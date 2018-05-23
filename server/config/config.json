@@ -1,0 +1,20 @@
+{
+    "test":{
+        "PORT":"3000",
+        "MONGODB_URI":"mongodb://localhost:27017/STUDENTTEST",
+        "JWT_SECRET":"TRTRHGHGFVBBNV5656"
+    },
+    "development":{
+        "PORT":"3000",
+        "MONGODB_URI":"mongodb://localhost:27017/STUDENT",
+        "JWT_SECRET":"QW5ERT5YUI5S5DAG6547FK5J734DFH",
+        
+        "facebookAuthClientID": "1894624250587693",
+        "facebookAuthClientSecret": "297aa884b33ae57a40978969b80b9d4f",
+        "facebookAuthCallbackURL":"https://localhost:3000/user/auth/facebook/callback",
+
+            "googleAuthClientID": "310680829950-n2dm2hl0n58257iida20t8fsufmrvlr4.apps.googleusercontent.com",
+            "googleAuthClientSecret": "iOHLvLsW02Z57X6TK-lqj5Id",
+            "googleAuthCallbackURL": "http://localhost:3000/user/auth/google/callback"        
+    }    
+}
