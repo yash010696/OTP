@@ -19,54 +19,30 @@ var UserSchema = new mongoose.Schema({
     },
     password: {
         type: String,
-        // required: true,
+        required: true,
         minlength: 6
     },
-    facebook: {
-        id: String,
-        token: String,
-        name: String,
-        email: String
-    },
-    google: {
-        id: String,
-        token: String,
-        name: String,
-        email: String
-    }
 },
     { timestamps: true }
 )
 
-
-
 UserSchema.pre('save', function (next) {
-    console.log('in preeeee');
-
     var user = this;
 
     if (user.isModified('password')) {
-        console.log('in ifffff');
-
         bcrypt.genSalt(10, (err, salt) => {
             bcrypt.hash(user.password, salt, (err, hash) => {
                 user.password = hash;
                 next();
             })
         });
-
     } else {
-        console.log('in else');
         next();
     }
 });
 UserSchema.methods.generateAutoToken = function () {
-    console.log('in method');
     var user = this;
-    var access = "auth";
-    var token = jwt.sign({ _id: user._id.toHexString(), access }, process.env.JWT_SECRET).toString();
-
-    // user.tokens.push({ access, token });
+    var token = jwt.sign({ _id: user._id.toHexString()}, process.env.JWT_SECRET).toString();
     localStorage.setItem('auth', token);
     return token;
 };
@@ -80,7 +56,6 @@ UserSchema.statics.findByCrediantials = function (email, password) {
         }
 
         return new Promise((resolve, reject) => {
-            console.log("in promise for password");
             bcrypt.compare(password, user.password, (err, res) => {
                 if (res) {
                     resolve(user);
@@ -92,6 +67,6 @@ UserSchema.statics.findByCrediantials = function (email, password) {
     });
 }
 
-var User = mongoose.model('User', UserSchema, collection = "yash");
+var User = mongoose.model('User', UserSchema, collection = "users");
 
 module.exports = { User };
